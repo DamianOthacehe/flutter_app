@@ -7,6 +7,8 @@ class Event {
   final String date;
   final String location;
   final String imageUrl;
+  final int initialAttendees;
+  final int initialLikes;
 
   // 2. El constructor
   const Event({
@@ -15,5 +17,7 @@ class Event {
     required this.date,
     required this.location,
     required this.imageUrl,
+    required this.initialAttendees,
+    required this.initialLikes,
   });
 }

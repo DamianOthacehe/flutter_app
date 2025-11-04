@@ -14,22 +14,43 @@ class EventCard extends StatefulWidget {
 }
 
 class _EventCardState extends State<EventCard> {
+  // --- ESTADOS Y CONTADORES ---
+  bool _isAttending = false;
   bool _isFavorite = false;
-  bool _isAttending = false; // Añadimos una para "Asistiré"
+  late int _attendeeCount;
+  late int _likeCount;
 
-  void _toggleFavorite() {
-    // Usamos setState() para notificar a Flutter que la UI debe re-dibujarse.
-    setState(() {
-      _isFavorite = !_isFavorite;
-    });
+  @override
+  void initState() {
+    super.initState();
+    // Inicializar los contadores con los valores del modelo
+    _attendeeCount = widget.event.initialAttendees;
+    _likeCount = widget.event.initialLikes;
   }
 
   void _toggleAttending() {
     setState(() {
       _isAttending = !_isAttending;
+      if (_isAttending) {
+        _attendeeCount++;
+      } else {
+        _attendeeCount--;
+      }
     });
   }
 
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorite = !_isFavorite;
+      if (_isFavorite) {
+        _likeCount++;
+      } else {
+        _likeCount--;
+      }
+    });
+  }
+
+  // --- WIDGET BUILD ---
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -37,7 +58,6 @@ class _EventCardState extends State<EventCard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            // Usamos 'widget.event' en lugar de solo 'event'
             builder: (context) => EventDetailScreen(event: widget.event),
           ),
         );
@@ -49,8 +69,9 @@ class _EventCardState extends State<EventCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // --- IMAGEN ---
             Image.network(
-              widget.event.imageUrl, // 'widget.event'
+              widget.event.imageUrl,
               height: 150,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -76,40 +97,57 @@ class _EventCardState extends State<EventCard> {
                 );
               },
             ),
+
+            // --- CONTENIDO DE TEXTO Y ACCIONES ---
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Título
                   Text(
-                    widget.event.title, // 'widget.event'
+                    widget.event.title,
                     style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8.0),
+
+                  // Fecha y Ubicación
                   Text(
-                    '${widget.event.date} | ${widget.event.location}', // 'widget.event'
+                    '${widget.event.date} | ${widget.event.location}',
                     style: const TextStyle(
                       fontSize: 14.0,
                       color: Colors.black54,
                     ),
                   ),
                   const SizedBox(height: 12.0),
+
+                  // 1. CONTADOR DE ASISTENTES (Línea Separada)
+                  Text(
+                    '$_attendeeCount personas asistirán',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blueGrey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+
+                  // 2. FILA DE ACCIONES (Botón Asistir | Likes/Compartir)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // A. BOTÓN ASISTIR (LADO IZQUIERDO)
                       TextButton.icon(
                         onPressed: _toggleAttending,
-
                         icon: Icon(
                           _isAttending
                               ? Icons.check_circle
                               : Icons.check_circle_outline,
                           color: _isAttending ? Colors.blueAccent : Colors.grey,
                         ),
-
                         label: Text(
                           _isAttending ? 'Asistiré' : 'Asistir',
                           style: TextStyle(
@@ -120,14 +158,33 @@ class _EventCardState extends State<EventCard> {
                         ),
                       ),
 
-                      IconButton(
-                        onPressed: _toggleFavorite,
-
-                        icon: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_border,
-                        ),
-
-                        color: _isFavorite ? Colors.redAccent : Colors.grey,
+                      // B. LIKES/COMPARTIR (LADO DERECHO, Agrupado)
+                      Row(
+                        children: [
+                          // CONTADOR DE LIKES
+                          Text(
+                            '$_likeCount',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          // Botón de Favorito
+                          IconButton(
+                            onPressed: _toggleFavorite,
+                            icon: Icon(
+                              _isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                            ),
+                            color: _isFavorite ? Colors.redAccent : Colors.grey,
+                          ),
+                          // Botón de Compartir
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.share, color: Colors.grey),
+                          ),
+                        ],
                       ),
                     ],
                   ),
