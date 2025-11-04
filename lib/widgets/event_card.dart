@@ -4,20 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/event_model.dart';
 import 'package:my_app/screens/event_detail_screen.dart';
 
-class EventCard extends StatelessWidget {
+class EventCard extends StatefulWidget {
   final Event event;
 
   const EventCard({super.key, required this.event});
 
   @override
+  State<EventCard> createState() => _EventCardState();
+}
+
+class _EventCardState extends State<EventCard> {
+  bool _isFavorite = false;
+  bool _isAttending = false; // Añadimos una para "Asistiré"
+
+  void _toggleFavorite() {
+    // Usamos setState() para notificar a Flutter que la UI debe re-dibujarse.
+    setState(() {
+      _isFavorite = !_isFavorite;
+    });
+  }
+
+  void _toggleAttending() {
+    setState(() {
+      _isAttending = !_isAttending;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //Envolvemos el Card con InkWell
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EventDetailScreen(event: event),
+            // Usamos 'widget.event' en lugar de solo 'event'
+            builder: (context) => EventDetailScreen(event: widget.event),
           ),
         );
       },
@@ -29,7 +50,7 @@ class EventCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              event.imageUrl,
+              widget.event.imageUrl, // 'widget.event'
               height: 150,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -61,7 +82,7 @@ class EventCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    event.title,
+                    widget.event.title, // 'widget.event'
                     style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -69,7 +90,7 @@ class EventCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    '${event.date} | ${event.location}',
+                    '${widget.event.date} | ${widget.event.location}', // 'widget.event'
                     style: const TextStyle(
                       fontSize: 14.0,
                       color: Colors.black54,
@@ -80,17 +101,33 @@ class EventCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton.icon(
-                        onPressed: () {
-                          /* Acción de asistir */
-                        },
-                        icon: const Icon(Icons.check_circle_outline),
-                        label: const Text('Asistiré'),
+                        onPressed: _toggleAttending,
+
+                        icon: Icon(
+                          _isAttending
+                              ? Icons.check_circle
+                              : Icons.check_circle_outline,
+                          color: _isAttending ? Colors.blueAccent : Colors.grey,
+                        ),
+
+                        label: Text(
+                          _isAttending ? 'Asistiré' : 'Asistir',
+                          style: TextStyle(
+                            color: _isAttending
+                                ? Colors.blueAccent
+                                : Colors.black,
+                          ),
+                        ),
                       ),
+
                       IconButton(
-                        onPressed: () {
-                          /* Acción de favorito */
-                        },
-                        icon: const Icon(Icons.favorite_border),
+                        onPressed: _toggleFavorite,
+
+                        icon: Icon(
+                          _isFavorite ? Icons.favorite : Icons.favorite_border,
+                        ),
+
+                        color: _isFavorite ? Colors.redAccent : Colors.grey,
                       ),
                     ],
                   ),
