@@ -31,6 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjA4OTh8MHwxfHNlYXJjaHwxfHxqYXp6JTIwY29uY2VydHxlbnwwfHx8fDE2NzM5MjI0NTE&ixlib=rb-4.0.3&q=80&w=400',
       initialAttendees: 150,
       initialLikes: 45,
+      creatorId: 'c1',
+      creatorName: 'Música Viva',
+      creatorImageUrl:
+          'https://images.unsplash.com/photo-1595971294624-80bcf0d7eb24?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bXVzaWNpYW58ZW58MHx8MHx8fDA%3D',
+      creatorBio:
+          'Somos un colectivo dedicado a promover la música en vivo y el arte local.', // Nuevo campo simulado
+      price: 0.0,
+      time: '19:00 - 22:00',
     ),
     Event(
       id: 'e2',
@@ -41,6 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://images.unsplash.com/photo-1582192730841-2a682d7375f9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774',
       initialAttendees: 150,
       initialLikes: 45,
+      creatorId: 'c2',
+      creatorName: 'Innovación Tech',
+      creatorImageUrl:
+          'https://plus.unsplash.com/premium_photo-1750235095427-03dfa05bf952?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1OHx8fGVufDB8fHx8fA%3D%3D',
+      creatorBio:
+          'Líderes en conferencias sobre inteligencia artificial y el futuro digital.', // Nuevo campo simulado
+      price: 45.99,
+      time: '09:00 - 17:00',
     ),
     Event(
       id: 'e3',
@@ -51,6 +67,14 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://images.unsplash.com/photo-1641903806973-17eaf2d2634f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870',
       initialAttendees: 150,
       initialLikes: 45,
+      creatorId: 'c1',
+      creatorName: 'Música Viva',
+      creatorImageUrl:
+          'https://images.unsplash.com/photo-1595971294624-80bcf0d7eb24?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bXVzaWNpYW58ZW58MHx8MHx8fDA%3D',
+      creatorBio:
+          'Somos un colectivo dedicado a promover la música en vivo y el arte local.', // Nuevo campo simulado
+      price: 0.0,
+      time: '19:00 - 22:00',
     ),
     Event(
       id: 'e4',
@@ -61,6 +85,14 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870',
       initialAttendees: 150,
       initialLikes: 45,
+      creatorId: 'c2',
+      creatorName: 'Innovación Tech',
+      creatorImageUrl:
+          'https://plus.unsplash.com/premium_photo-1750235095427-03dfa05bf952?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1OHx8fGVufDB8fHx8fA%3D%3D',
+      creatorBio:
+          'Líderes en conferencias sobre inteligencia artificial y el futuro digital.', // Nuevo campo simulado
+      price: 45.99,
+      time: '09:00 - 17:00',
     ),
   ];
   // 🟢 2. FUNCIÓN PARA NAVEGAR Y ESPERAR EL RESULTADO

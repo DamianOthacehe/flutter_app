@@ -9,6 +9,12 @@ class Event {
   final String imageUrl;
   final int initialAttendees;
   final int initialLikes;
+  final String creatorId;
+  final String creatorName;
+  final String creatorImageUrl;
+  final String creatorBio;
+  final double price;
+  final String time;
 
   // 2. El constructor
   const Event({
@@ -19,5 +25,11 @@ class Event {
     required this.imageUrl,
     required this.initialAttendees,
     required this.initialLikes,
+    required this.creatorId,
+    required this.creatorName,
+    required this.creatorImageUrl,
+    required this.creatorBio,
+    required this.price,
+    required this.time,
   });
 }
